@@ -1,5 +1,5 @@
-include("map_en_graphe.jl")
-include("affichage.jl")
+include("MapEnGraphe.jl")
+include("Affichage.jl")
 using DataStructures
 
 function heuristique(v, vA, c_min)
@@ -29,16 +29,16 @@ function algoAstar(fname, vD, vA)
             visites      = falses(rows, cols)
             predecesseur = fill((0,0), rows, cols)
 
-            # File de priorité : priorité = f(v) = g(v) + h(v)
-            pq = PriorityQueue{Tuple{Int,Int}, Float64}()
+            # Tas min : (f(v), pos) pour accepter plusieurs fois la même case (priorités différentes)
+            heap = BinaryMinHeap{Tuple{Float64, Tuple{Int,Int}}}()
             hD = heuristique(vD, vA, c_min)
-            enqueue!(pq, vD => (0 + hD))
+            push!(heap, (0.0 + hD, vD))
 
             nb_etats = 0
             cheminValide = false
 
-            while !isempty(pq)
-                pos = dequeue!(pq)
+            while !isempty(heap)
+                (f_val, pos) = pop!(heap)
                 i, j = pos
 
                 if visites[i, j] # si la case est deja visité" on repart de la boucle while
@@ -63,7 +63,7 @@ function algoAstar(fname, vD, vA)
                             g[ni, nj] = new_g
                             predecesseur[ni, nj] = pos
                             h_voisin = heuristique((ni, nj), vA, c_min)
-                            enqueue!(pq, (ni, nj) => (new_g + h_voisin))
+                            push!(heap, (new_g + h_voisin, (ni, nj)))
                         end
                     end
                 end
