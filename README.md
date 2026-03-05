@@ -109,5 +109,6 @@ Projet_d_informatique_scientifique/
 ├── res/
 │   └── resultat.txt  
 ├── docs/                # Documentation
+│   └── DOC.md
 └── README.md
 ```
