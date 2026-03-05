@@ -62,7 +62,7 @@ julia
 Appuier sur ']'
 
 # Puis ajouter le package :
-DataStructures
+add DataStructures
 
 ```
 
