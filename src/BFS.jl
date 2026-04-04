@@ -54,7 +54,7 @@ function algoBFS(fname, vD, vA)
                         M[ni, nj] != 0 &&# la case n'est pas un mur
                         !visites[ni, nj] 
 
-                        newdist = dist[i,j] + M[ni,nj]
+                        newdist = dist[i,j] + 1 # (+1) car c'est le coût de 1 pour chaque case
                         dist[ni,nj] = newdist
                         predecesseur[ni, nj] = pos  # Ajoute de la positon actuelle sur la nouvelle position
                         enqueue!(file, (ni, nj))
