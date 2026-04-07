@@ -63,12 +63,13 @@ Appuier sur ']'
 
 # Puis ajouter le package :
 add DataStructures
+add CairoMakie
 
 ```
 
 ---
 
-## 🚀 Utilisation
+##  Utilisation
 
 ### Lancement basique dans le REPL
 ```julia
@@ -91,7 +92,7 @@ avec comme paramètres :
 
 ---
 
-## 📁 Structure du projet
+##  Structure du projet
 ```
 Projet_d_informatique_scientifique/
 ├── src/
@@ -102,11 +103,11 @@ Projet_d_informatique_scientifique/
 │   ├── Glouton.jl
 │   ├── Affichage.jl
 │   └── MapEnGraphe.jl  
-├── dat/
+├── dat/                 #données
 │   ├── bootybay.map       
 │   ├── Aurora.map
 │   └── Berlin_0_256.map
-├── res/
+├── res/                 #resultat
 │   └── resultat.txt  
 ├── docs/                # Documentation
 │   └── DOC.md
