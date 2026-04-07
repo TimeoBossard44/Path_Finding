@@ -73,10 +73,6 @@ function crossDocking(fname)
 
                         AMR_dict[id].chemin = algoAstar2_0(fname, chemin_suivant, AMR_dict[id].arrivee)
 
-                        #=if isempty(AMR_dict[id].chemin) 
-                            #println("Aucun chemin trouver pour AMR $id")
-                            continue
-                        end=#
                         break
                     end
                 end
