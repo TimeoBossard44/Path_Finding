@@ -5,7 +5,7 @@ using DataStructures
 function algoBFS(fname, vD, vA)
 
     # Matrice pondérée du fichier fname
-    M = lireMapPondere("../dat/$fname")
+    M = lireMapPondere("dat/$fname")
 
     temps = @elapsed begin
         allocation = @allocated begin
@@ -65,7 +65,7 @@ function algoBFS(fname, vD, vA)
     end
 
     # Reconstruction du chemin
-    chemin = []
+    chemin = Tuple{Int,Int}[]
     if cheminValide
         etape = vA
         while etape !== (0,0)
@@ -77,6 +77,6 @@ function algoBFS(fname, vD, vA)
 
     distance = cheminValide ? dist[vA[1], vA[2]] : 0
 
-    return afficherResultat(distance, nb_etats, chemin, temps, allocation)
+    return afficherResultat(distance, nb_etats, chemin, temps, allocation, fname,"solutionBFS")
 end 
 
