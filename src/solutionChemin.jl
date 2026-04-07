@@ -1,12 +1,4 @@
-"""
-Écrit un fichier `.map` modifié où toutes les positions du `chemin` sont remplacées par 'X'.
 
-- `input_map` : chemin du fichier `.map` source
-- `chemin`    : vecteur de positions (ligne, colonne) = `Vector{Tuple{Int,Int}}`
-- `output_map`: chemin du fichier `.map` destination
-
-La modification ne touche que la section après la ligne `map`.
-"""
 function ecrire_solution_map(input_map::String, chemin::AbstractVector{<:Tuple{Int,Int}}, output_map::String)
     lines = readlines(input_map)
 
