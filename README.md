@@ -82,6 +82,7 @@ algoBFS(fname, D, A)
 algoDijkstra(fname, D, A)
 algoGlouton(fname, D, A)
 algoAstar(fname, D, A)
+crossDocking(fname)
 
 avec comme paramètres :
 
@@ -102,13 +103,20 @@ Projet_d_informatique_scientifique/
 │   ├── Astar.jl
 │   ├── Glouton.jl
 │   ├── Affichage.jl
-│   └── MapEnGraphe.jl  
+│   ├── MapEnGraphe.jl
+│   ├── MapToPDF.jl
+│   ├── lireDonneeAMR.jl
+│   ├── CrossDocking.jl
+│   └── solutionChemin.jl
 ├── dat/                 #données
 │   ├── bootybay.map       
 │   ├── Aurora.map
-│   └── Berlin_0_256.map
+│   ├── Berlin_0_256.map
+│   ├── theglaive.map
+│   ├── crossDoc.map
+│   └── crossDoc2.map
 ├── res/                 #resultat
-│   └── resultat.txt  
+│   └── RES.md  
 ├── docs/                # Documentation
 │   └── DOC.md
 └── README.md
