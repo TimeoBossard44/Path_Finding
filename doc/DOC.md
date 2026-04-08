@@ -1,4 +1,4 @@
-# Documentation — Path Finding
+# Documentation - Path Finding
 
 Projet Julia de recherche de chemins sur des cartes au format(fichiers `.map`), avec plusieurs algorithmes, visualisation PDF et un module expérimental de **cross-docking** (plusieurs AMR).
 
@@ -16,7 +16,7 @@ Projet Julia de recherche de chemins sur des cartes au format(fichiers `.map`), 
 
 ## Point d’entrée
 
-- **`Main.jl`** — Inclut les modules : A*, BFS, Dijkstra, Glouton, `MapToPDF`, `solutionChemin`, `CrossDocking`. Décommenter les appels souhaités pour lancer un algorithme.
+- **`Main.jl`** - Inclut les modules : A*, BFS, Dijkstra, Glouton, `MapToPDF`, `solutionChemin`, `CrossDocking`. Décommenter les appels souhaités pour lancer un algorithme.
 
 ---
 
@@ -37,7 +37,7 @@ Les cartes peuvent inclure une section **`amr`** (voir `lireDonneeAMR.jl`) avant
 
 ### Constante
 
-- **`couts`** — Dictionnaire des coûts par caractère : `'@' => 0` (mur), `'W' => 8`, `'S' => 5` ; les autres cases traversables reçoivent le coût **1** par défaut lors de la lecture.
+- **`couts`** - Dictionnaire des coûts par caractère : `'@' => 0` (mur), `'W' => 8`, `'S' => 5` ; les autres cases traversables reçoivent le coût **1** par défaut lors de la lecture.
 
 ### Fonction
 
@@ -90,7 +90,7 @@ Elles retournent en général le résultat via **`afficherResultat`** (distance,
 | Élément | Description |
 |---------|-------------|
 | **`_basename_noext`** | Utilitaire : nom de fichier sans extension. |
-| **`parse_map(filename)`** | Lit un `.map` et construit une grille d’entiers (0–6) pour l’affichage : murs, sol, types de terrain, **`X`** pour chemin. |
+| **`parse_map(filename)`** | Lit un `.map` et construit une grille d’entiers (0-6) pour l’affichage : murs, sol, types de terrain, **`X`** pour chemin. |
 | **`map_to_pdf(input_file, s::String)`** | Génère un **PDF** (CairoMakie) à partir du fichier carte ; applique une **rotation** (`rotr90`) pour l’orientation ; enregistre sous `res/` avec un nom dérivé de **`input_file`** et du paramètre **`s`**. |
 
 ---
@@ -99,7 +99,7 @@ Elles retournent en général le résultat via **`afficherResultat`** (distance,
 
 ### Structure
 
-- **`mutable struct AMR`** (`lireDonneeAMR.jl`) — Champs : position actuelle, file **`chemin`**, arrivée, compteur de temps **`t`**.
+- **`mutable struct AMR`** (`lireDonneeAMR.jl`) - Champs : position actuelle, file **`chemin`**, arrivée, compteur de temps **`t`**.
 
 ### Fonctions
 
