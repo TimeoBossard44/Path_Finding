@@ -10,7 +10,7 @@ function crossDocking(fname)
     println(AMR_dict)
 
     directionsGaucheDroite = [(-1,0), (1,0), (0,1), (0,-1)]
-    directionsHautBas = [(0,1), (0,-1), (-1,0), (1,0)]
+    directionsHautBas = [(0,-1), (0,1), (-1,0), (1,0)]
 
     rows = size(M, 1)
     cols = size(M, 2)
