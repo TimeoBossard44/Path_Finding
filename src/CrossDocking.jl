@@ -17,13 +17,21 @@ function crossDocking(fname)
     
     s = "" # string pour les résultats
     tempsInit = Vector{Int64}(undef, length(AMR_dict)) # pour stocker les temps initiaux de chaque AMR
+    coutCase = Vector{Int64}(undef, length(AMR_dict)) # coût terrain de la case où se trouve l'AMR
+    coutTotal = Vector{Int64}(undef, length(AMR_dict)) # somme des coûts des cases d'arrivée à chaque pas
+    nbPas = Vector{Int64}(undef, length(AMR_dict))     # nombre de pas (un pas = un déplacement / un tick pour cet AMR)
 
     for id in keys(AMR_dict)
         chemin = algoAstar2_0(fname, AMR_dict[id].actuelle_pos, AMR_dict[id].arrivee)
         AMR_dict[id].chemin = chemin
-        M[AMR_dict[id].actuelle_pos[1], AMR_dict[id].actuelle_pos[2]] = 0
         println("chemin de $id : $chemin")
         tempsInit[id] = AMR_dict[id].t
+        
+        i0, j0 = AMR_dict[id].actuelle_pos[1], AMR_dict[id].actuelle_pos[2]
+        coutCase[id] = M[i0, j0]   # lire le coût AVANT d'occuper la case (M[..]=0)
+        coutTotal[id] = 0
+        nbPas[id] = 0
+        M[i0, j0] = 0 # case occupée par l'AMR
     end
 
     println(AMR_dict)
@@ -34,12 +42,12 @@ function crossDocking(fname)
 
         #sleep(1)
         println("--------------------------------")
-        println("Temps : $t")
+        #println("Temps : $t")
 
         for id in sort(collect(keys(AMR_dict))) # pour tous les AMR
             if AMR_dict[id].t == t # on regarde si l'AMR est au bon temps
 
-                println("id : $id")
+                #println("id : $id")
                 chemin_suivant = dequeue!(AMR_dict[id].chemin)
                 #println(chemin_suivant)
 
@@ -59,18 +67,18 @@ function crossDocking(fname)
                         end
 
                         for (dl, dc) in directions # deplacer l'AMR qui a causé la collision d'une case
-                            cout = M[AMR_dict[id2].actuelle_pos[1], AMR_dict[id2].actuelle_pos[2]]
+                            
 
                             ni = AMR_dict[id].actuelle_pos[1] + dl
                             nj = AMR_dict[id].actuelle_pos[2] + dc
 
-                            M[AMR_dict[id2].actuelle_pos[1], AMR_dict[id2].actuelle_pos[2]] = 0
+                            
                             # Reste dans la Map et pas un mur
                             if 1 <= ni <= rows && 1 <= nj <= cols && M[ni, nj] != 0 
                                 enqueue!(pq, (ni, nj) => M[ni, nj]) 
                             end
 
-                            M[AMR_dict[id2].actuelle_pos[1], AMR_dict[id2].actuelle_pos[2]] = cout
+                            
                         end
 
                         println(pq)
@@ -83,19 +91,22 @@ function crossDocking(fname)
                             continue
                         end
                     
-                        chemin_suivant = dequeue!(pq)  # renvoie la position (Tuple), pas un Pair
+                        chemin_suivant = dequeue!(pq)  # renvoie la position (Tuple)
 
                         AMR_dict[id].chemin = algoAstar2_0(fname, chemin_suivant, AMR_dict[id].arrivee)
 
                         break
                     end
                 end
-                M[AMR_dict[id].actuelle_pos[1], AMR_dict[id].actuelle_pos[2]] = 1
+                M[AMR_dict[id].actuelle_pos[1], AMR_dict[id].actuelle_pos[2]] = coutCase[id] # on remet le coût de la case où est l'AMR
                 AMR_dict[id].actuelle_pos = chemin_suivant
-                println("chemin de $id : $(AMR_dict[id].chemin)")
-                M[AMR_dict[id].actuelle_pos[1], AMR_dict[id].actuelle_pos[2]] = 0
+                #println("chemin de $id : $(AMR_dict[id].chemin)")
+                coutCase[id] = M[AMR_dict[id].actuelle_pos[1], AMR_dict[id].actuelle_pos[2]] # coût de la case d'arrivée
+                coutTotal[id] += coutCase[id]
+                nbPas[id] += 1
+                M[AMR_dict[id].actuelle_pos[1], AMR_dict[id].actuelle_pos[2]] = 0 # on met un mur sur la case où est l'AMR
 
-                println("position de $id : $(AMR_dict[id].actuelle_pos)")
+                #println("position de $id : $(AMR_dict[id].actuelle_pos)")
                 AMR_dict[id].t += 1
 
             end 
@@ -106,7 +117,8 @@ function crossDocking(fname)
         for id in sort(collect(keys(AMR_dict)))
             if AMR_dict[id].actuelle_pos == AMR_dict[id].arrivee
                 println("AMR $id a atteint son objectif")
-                s = s * ("AMR $id a atteint son objectif apres $(AMR_dict[id].t - tempsInit[id]) pas et $(AMR_dict[id].t) iterations") * "\n"
+                s = s * ("AMR $id a atteint son objectif apres $(nbPas[id]) pas, un cout total de $(coutTotal[id]) et $(AMR_dict[id].t) iterations") * "\n"
+
                 delete!(AMR_dict, id)
             end
         end
