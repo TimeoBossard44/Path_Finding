@@ -16,12 +16,14 @@ function crossDocking(fname)
     cols = size(M, 2)
     
     s = "" # string pour les résultats
+    tempsInit = Vector{Int64}(undef, length(AMR_dict)) # pour stocker les temps initiaux de chaque AMR
 
     for id in keys(AMR_dict)
         chemin = algoAstar2_0(fname, AMR_dict[id].actuelle_pos, AMR_dict[id].arrivee)
         AMR_dict[id].chemin = chemin
         M[AMR_dict[id].actuelle_pos[1], AMR_dict[id].actuelle_pos[2]] = 0
         println("chemin de $id : $chemin")
+        tempsInit[id] = AMR_dict[id].t
     end
 
     println(AMR_dict)
@@ -104,7 +106,7 @@ function crossDocking(fname)
         for id in sort(collect(keys(AMR_dict)))
             if AMR_dict[id].actuelle_pos == AMR_dict[id].arrivee
                 println("AMR $id a atteint son objectif")
-                s = s * ("AMR $id a atteint son objectif apres $(AMR_dict[id].t) iterations") * "\n"
+                s = s * ("AMR $id a atteint son objectif apres $(AMR_dict[id].t - tempsInit[id]) pas et $(AMR_dict[id].t) iterations") * "\n"
                 delete!(AMR_dict, id)
             end
         end
