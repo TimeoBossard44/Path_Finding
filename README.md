@@ -73,7 +73,7 @@ add CairoMakie
 
 ### Lancement basique dans le REPL
 ```julia
-include("Main.jl")
+include("src/Main.jl")
 ```
 
 ### Lancer les tests
