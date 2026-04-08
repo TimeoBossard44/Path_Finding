@@ -1,4 +1,4 @@
-# Documentation — Path Finding
+# Documentation - Path Finding
 
 Projet Julia de recherche de chemins sur des cartes au format(fichiers `.map`), avec plusieurs algorithmes, visualisation PDF et un module expérimental de **cross-docking** (plusieurs AMR).
 
@@ -16,7 +16,7 @@ Projet Julia de recherche de chemins sur des cartes au format(fichiers `.map`), 
 
 ## Point d’entrée
 
-- **`Main.jl`** — Inclut les modules : A*, BFS, Dijkstra, Glouton, `MapToPDF`, `solutionChemin`, `CrossDocking`. Décommenter les appels souhaités pour lancer un algorithme.
+- **`Main.jl`** - Inclut les modules : A*, BFS, Dijkstra, Glouton, `MapToPDF`, `solutionChemin`, `CrossDocking`. Décommenter les appels souhaités pour lancer un algorithme.
 
 ---
 
@@ -37,7 +37,7 @@ Les cartes peuvent inclure une section **`amr`** (voir `lireDonneeAMR.jl`) avant
 
 ### Constante
 
-- **`couts`** — Dictionnaire des coûts par caractère : `'@' => 0` (mur), `'W' => 8`, `'S' => 5` ; les autres cases traversables reçoivent le coût **1** par défaut lors de la lecture.
+- **`couts`** - Dictionnaire des coûts par caractère : `'@' => 0` (mur), `'W' => 8`, `'S' => 5` ; les autres cases traversables reçoivent le coût **1** par défaut lors de la lecture.
 
 ### Fonction
 
