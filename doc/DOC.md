@@ -90,7 +90,7 @@ Elles retournent en général le résultat via **`afficherResultat`** (distance,
 | Élément | Description |
 |---------|-------------|
 | **`_basename_noext`** | Utilitaire : nom de fichier sans extension. |
-| **`parse_map(filename)`** | Lit un `.map` et construit une grille d’entiers (0–6) pour l’affichage : murs, sol, types de terrain, **`X`** pour chemin. |
+| **`parse_map(filename)`** | Lit un `.map` et construit une grille d’entiers (0-6) pour l’affichage : murs, sol, types de terrain, **`X`** pour chemin. |
 | **`map_to_pdf(input_file, s::String)`** | Génère un **PDF** (CairoMakie) à partir du fichier carte ; applique une **rotation** (`rotr90`) pour l’orientation ; enregistre sous `res/` avec un nom dérivé de **`input_file`** et du paramètre **`s`**. |
 
 ---
@@ -99,7 +99,7 @@ Elles retournent en général le résultat via **`afficherResultat`** (distance,
 
 ### Structure
 
-- **`mutable struct AMR`** (`lireDonneeAMR.jl`) — Champs : position actuelle, file **`chemin`**, arrivée, compteur de temps **`t`**.
+- **`mutable struct AMR`** (`lireDonneeAMR.jl`) - Champs : position actuelle, file **`chemin`**, arrivée, compteur de temps **`t`**.
 
 ### Fonctions
 
